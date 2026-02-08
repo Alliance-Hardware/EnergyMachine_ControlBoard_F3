@@ -45,11 +45,19 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+        ${CMAKE_SOURCE_DIR}/Bsp/Src/bsp_can.c
+        ${CMAKE_SOURCE_DIR}/Bsp/Src/bsp_adc.c
+        ${CMAKE_SOURCE_DIR}/Bsp/Src/bsp_timer.c
+        ${CMAKE_SOURCE_DIR}/App/Src/app.c
+        ${CMAKE_SOURCE_DIR}/App/Src/ISR.c
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
+        ${CMAKE_SOURCE_DIR}/Core/Inc/
+        ${CMAKE_SOURCE_DIR}/Bsp/Inc/
+        ${CMAKE_SOURCE_DIR}/App/Inc/
 )
 
 # Add project symbols (macros)
