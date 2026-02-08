@@ -1,8 +1,7 @@
 #include "adc.h"
-#include "bsp_adc.h"
-
-#include "bsp_can.h"
 #include "stm32f3xx_hal_adc_ex.h"
+#include "bsp_adc.h"
+#include "bsp_can.h"
 #include "Config.h"
 
 static uint16_t adc_sample[10] = {0};	// ADC采样的数据缓存到其中
@@ -57,7 +56,6 @@ void Bsp_ADC_Process(void) {
 	uint8_t tx_data[8] = {0};
 	uint8_t current_mask = Bsp_ADC_Detect();
 
-	Bsp_CAN_SendMsg(&hcan, id, tx_data);
 	// 比较当前掩码与上次掩码
 	if (current_mask != 0) {
 		if(current_mask == last_target_mask && timer < 10){

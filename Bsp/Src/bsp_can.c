@@ -1,9 +1,9 @@
-#include "can.h"
 #include "main.h"
-#include "bsp_can.h"
-#include "app.h"
-#include "Config.h"
+#include "can.h"
 #include "usart.h"
+#include "app.h"
+#include "bsp_can.h"
+#include "Config.h"
 #ifdef CAN
 /* ---------- CAN 配置 ---------- */
 CAN_RxFrame_TypeDef CanRxFrame;

@@ -1,12 +1,12 @@
+#include "stm32f334x8.h"
+#include "stm32f3xx_hal.h"
 #include "ISR.h"
 #include "app.h"
 #include "bsp_adc.h"
 #include "bsp_timer.h"
 #include "bsp_can.h"
 #include "Config.h"
-#include "stm32f334x8.h"
-#include "stm32f3xx_hal_adc.h"
-#include "stm32f3xx_hal_can.h"
+#include "stm32f3xx_hal_gpio.h"
 // ADC DMA转换完成中断回调函数
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 	if (hadc->Instance == ADC1) {
@@ -28,8 +28,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
     CAN_RxHeaderTypeDef rx1_header;
     uint8_t rx_data[8];
+	led_flag = 1;
     HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx1_header, rx_data);
-    BSP_CAN_Process(rx1_header.StdId, rx_data); // 传入标识符和数据
+    Bsp_CAN_Process(rx1_header.StdId, rx_data); // 传入标识符和数据
 }
 
 // GPIO中断回调函数

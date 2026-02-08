@@ -48,6 +48,6 @@ extern CAN_RxFrame_TypeDef Can2RxFrame;
 extern void Bsp_CAN_Init(void);
 extern void Bsp_CAN_SendMsg(CAN_HandleTypeDef *hcan, uint16_t id,
                             uint8_t *tx_data);
-extern void BSP_CAN_Process(uint32_t id, uint8_t *rx_data);
+extern void Bsp_CAN_Process(uint32_t id, uint8_t *rx_data);
 
 #endif
