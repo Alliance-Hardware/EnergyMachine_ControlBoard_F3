@@ -208,22 +208,23 @@ void Bsp_CAN_Process(uint32_t id, uint8_t *rx_data){
                     HAL_UART_Transmit(&huart2, &data, 1,100);
                 }
                 else{
-                switch(rx_data[EM_ID]){
-                    case Target_Ring_1:
-                    case Target_Ring_2:
-                    case Target_Ring_3:
-                    case Target_Ring_4:
-                    case Target_Ring_5:
-                    case Target_Ring_6:
-                    case Target_Ring_7:
-                    case Target_Ring_8:
-                    case Target_Ring_9:
-                    case Target_Ring_10:
-                        data = rx_data[EM_ID];
-                        HAL_UART_Transmit(&huart2, &data, 1,100);
-                        break;
-                    default:
-                        break;
+                  switch(rx_data[EM_ID]){
+                      case Display_Disable:
+                      case Target_Ring_1:
+                      case Target_Ring_2:
+                      case Target_Ring_3:
+                      case Target_Ring_4:
+                      case Target_Ring_5:
+                      case Target_Ring_6:
+                      case Target_Ring_7:
+                      case Target_Ring_8:
+                      case Target_Ring_9:
+                      case Target_Ring_10:
+                          data = rx_data[EM_ID];
+                          HAL_UART_Transmit(&huart2, &data, 1,100);
+                          break;
+                      default:
+                          break;
                     }
                 }
                 break;
@@ -235,14 +236,16 @@ void Bsp_CAN_Process(uint32_t id, uint8_t *rx_data){
                 if(color == COLOR_RED){
                     break;
                 }
-                    color = COLOR_RED;
-                    HAL_UART_Transmit(&huart2, &tx_data, 1,100);
-                    break;
+                color = COLOR_RED;
+                tx_data = COLOR_RED;
+                HAL_UART_Transmit(&huart2, &tx_data, 1,100);
+                break;
             case COLOR_GREEN:
                 if(color == COLOR_GREEN){
-                        break;
-                    }
+                    break;
+                }
                 color = COLOR_GREEN;
+                tx_data = COLOR_GREEN;
                 HAL_UART_Transmit(&huart2, &tx_data, 1,100);
                 break;
             case COLOR_BLUE:
@@ -250,6 +253,7 @@ void Bsp_CAN_Process(uint32_t id, uint8_t *rx_data){
                     break;
                 }
                 color = COLOR_BLUE;
+                tx_data = COLOR_BLUE;
                 HAL_UART_Transmit(&huart2, &tx_data, 1,100);
                 break;
             default:
