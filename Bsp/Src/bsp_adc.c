@@ -4,9 +4,9 @@
 #include "bsp_can.h"
 #include "Config.h"
 
+extern uint8_t timer;
 static uint16_t adc_sample[10] = {0};	// ADC采样的数据缓存到其中
 static uint8_t last_target_mask = 0;	// 上次击打检测到的环数
-static uint8_t timer = 0;				// ADC延时滤波
 const uint8_t index_to_ring[10] = {6, 7, 8, 9, 10, 5, 4, 3, 2, 1};	// 实际环数与ADC通道对应关系
 
 void Bsp_ADC_Init(void) {
@@ -52,15 +52,15 @@ uint8_t Bsp_ADC_Detect(void) {
 
 // 在中断中处理的函数
 void Bsp_ADC_Process(void) {
+	if(timer < 30){
+		return;
+	}
 	uint16_t id = CAN_BASE_ID + EM_ID;
 	uint8_t tx_data[8] = {0};
 	uint8_t current_mask = Bsp_ADC_Detect();
-
 	// 比较当前掩码与上次掩码
 	if (current_mask != 0) {
-		if(current_mask == last_target_mask && timer < 10){
-			return;
-		}
+		
 		tx_data[0] = current_mask;
 		Bsp_CAN_SendMsg(&hcan, id, tx_data);
 		//更新上次掩码
