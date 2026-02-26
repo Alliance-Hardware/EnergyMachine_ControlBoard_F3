@@ -1,7 +1,8 @@
 #ifndef STM32F334_NEW_HUB75_CONFIG_H
 #define STM32F334_NEW_HUB75_CONFIG_H
 // ADC的阈值
-#define THRESHOLD 200
+#define ADC_THRESHOLD 240
+#define TIMER_THRESHOLD 100
 // 符叶ID,范围3-7
 #define EM_ID				0x07
 #define CAN_BASE_ID			0x400

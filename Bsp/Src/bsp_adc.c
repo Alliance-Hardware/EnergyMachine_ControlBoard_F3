@@ -22,7 +22,7 @@ uint8_t Bsp_ADC_Detect(void) {
 
 	// 找出最高环号
 	for (int i = 0; i < 10; i++) {
-		if (adc_sample[i] > THRESHOLD) {
+		if (adc_sample[i] > ADC_THRESHOLD) {
 			uint8_t current_ring = index_to_ring[i];
 			if (current_ring > max_ring) {
 				max_ring = current_ring;
@@ -52,7 +52,7 @@ uint8_t Bsp_ADC_Detect(void) {
 
 // 在中断中处理的函数
 void Bsp_ADC_Process(void) {
-	if(timer < 30){
+	if(timer < TIMER_THRESHOLD){
 		return;
 	}
 	uint16_t id = CAN_BASE_ID + EM_ID;

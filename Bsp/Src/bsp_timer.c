@@ -11,7 +11,7 @@ void Bsp_Timer_Init(void) {
 	HAL_TIM_Base_Start_IT(&htim2);
 }
 void Bsp_Timer2_Handler(void) {
-	if(timer < 30){
+	if(timer < TIMER_THRESHOLD){	//定时器滤波
 		timer++;
 	}
 	if(led_flag == 1 && led_timer < 100){
